@@ -153,7 +153,7 @@ std::map<std::pair<Symbol, TokenKind>, std::vector<Symbol>> BuildTable() {
         M[{Symbol::D, t}] = {Symbol::C, Symbol::D1};
         M[{Symbol::C, t}] = {Symbol::N, Symbol::C1};
     }
-    M[{Symbol::I1, TokenKind::Imp}] = {Symbol::Imp, Symbol::D, Symbol::MkImp, Symbol::I1};
+    M[{Symbol::I1, TokenKind::Imp}] = {Symbol::Imp, Symbol::I, Symbol::MkImp, Symbol::I1};
     for (TokenKind t : {TokenKind::Or, TokenKind::RParen, TokenKind::End}) M[{Symbol::I1, t}] = {};
 
     M[{Symbol::D1, TokenKind::Or}] = {Symbol::Or, Symbol::C, Symbol::MkOr, Symbol::D1};
@@ -254,7 +254,7 @@ public:
     double Or(double a, double b) const { return std::max(a, b); }
     double Imp(double a, double b) const {
         if (id == Id::Lukasiewicz) return std::min(1.0, 1 - a + b);
-        return std::max(1 - a, b);  // C2 и K3
+        return std::max(1 - a, b);
     }
 };
 
@@ -625,7 +625,7 @@ void PrintHelp() {
         "  demo\n"
         "      Проверка работоспособности на формулах варианта 4.\n"
         "  help — эта справка;  exit — выход.\n"
-        "Операции: ~, &, |, -> (допускаются также ¬, ∧, ∨, →). Значения: 0, 1/2, 1.\n";
+        "Операции: ~, &, |, ->. Значения: 0, 1/2, 1.\n";
 }
 
 void PrintSystemSemantics() {
